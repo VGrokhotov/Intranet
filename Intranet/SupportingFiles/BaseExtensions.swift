@@ -44,4 +44,19 @@ extension UIViewController {
         button.layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         button.clipsToBounds = true
     }
+    
+    //MARK: To dismiss keyboard after tapping anywhere else
+    
+    func setupToHideKeyboardOnTapOnView() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(
+            target: self,
+            action: #selector(UIViewController.dismissKeyboard))
+
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
 }
