@@ -15,6 +15,10 @@
 		86AB1FFE24A8D4D4007C60A4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 86AB1FFD24A8D4D4007C60A4 /* Assets.xcassets */; };
 		86AB200124A8D4D4007C60A4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86AB1FFF24A8D4D4007C60A4 /* LaunchScreen.storyboard */; };
 		86AB200C24A8DFE0007C60A4 /* BaseExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86AB200B24A8DFE0007C60A4 /* BaseExtensions.swift */; };
+		86AB201024A8E31F007C60A4 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86AB200F24A8E31F007C60A4 /* User.swift */; };
+		86AB201224A8E371007C60A4 /* UserObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86AB201124A8E371007C60A4 /* UserObject.swift */; };
+		86AB201424A8E43A007C60A4 /* UserAuthorization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86AB201324A8E43A007C60A4 /* UserAuthorization.swift */; };
+		86AB201624A8E468007C60A4 /* UsersStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86AB201524A8E468007C60A4 /* UsersStorageManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +32,10 @@
 		86AB200024A8D4D4007C60A4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		86AB200224A8D4D4007C60A4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		86AB200B24A8DFE0007C60A4 /* BaseExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseExtensions.swift; sourceTree = "<group>"; };
+		86AB200F24A8E31F007C60A4 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		86AB201124A8E371007C60A4 /* UserObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserObject.swift; sourceTree = "<group>"; };
+		86AB201324A8E43A007C60A4 /* UserAuthorization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAuthorization.swift; sourceTree = "<group>"; };
+		86AB201524A8E468007C60A4 /* UsersStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersStorageManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +68,7 @@
 		86AB1FF024A8D4CF007C60A4 /* Intranet */ = {
 			isa = PBXGroup;
 			children = (
+				86AB201724A8E586007C60A4 /* CoreData */,
 				86AB200824A8DEF3007C60A4 /* ViewControllers */,
 				86AB200A24A8DF56007C60A4 /* Models */,
 				86AB200924A8DF4D007C60A4 /* SupportingFiles */,
@@ -93,8 +102,19 @@
 		86AB200A24A8DF56007C60A4 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				86AB200F24A8E31F007C60A4 /* User.swift */,
+				86AB201124A8E371007C60A4 /* UserObject.swift */,
+				86AB201324A8E43A007C60A4 /* UserAuthorization.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		86AB201724A8E586007C60A4 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				86AB201524A8E468007C60A4 /* UsersStorageManager.swift */,
+			);
+			path = CoreData;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -170,9 +190,13 @@
 			files = (
 				86AB200C24A8DFE0007C60A4 /* BaseExtensions.swift in Sources */,
 				86AB1FF624A8D4CF007C60A4 /* ViewController.swift in Sources */,
+				86AB201424A8E43A007C60A4 /* UserAuthorization.swift in Sources */,
+				86AB201024A8E31F007C60A4 /* User.swift in Sources */,
+				86AB201624A8E468007C60A4 /* UsersStorageManager.swift in Sources */,
 				86AB1FF224A8D4CF007C60A4 /* AppDelegate.swift in Sources */,
 				86AB1FFC24A8D4CF007C60A4 /* Intranet.xcdatamodeld in Sources */,
 				86AB1FF424A8D4CF007C60A4 /* SceneDelegate.swift in Sources */,
+				86AB201224A8E371007C60A4 /* UserObject.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
