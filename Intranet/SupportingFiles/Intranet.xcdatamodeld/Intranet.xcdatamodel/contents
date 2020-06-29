@@ -1,11 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="16119" systemVersion="19F101" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="ChatObject" representedClassName="ChatObject" syncable="YES">
+        <attribute name="interlocutorID" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="interlocutorName" optional="YES" attributeType="String"/>
+        <attribute name="interlocutorSurname" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="MessagesObject" representedClassName="MessagesObject" syncable="YES">
+        <attribute name="array" optional="YES" attributeType="Transformable" customClassName="Messages"/>
+        <attribute name="interlocutorID" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+    </entity>
     <entity name="UserObject" representedClassName="UserObject" syncable="YES">
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="surname" optional="YES" attributeType="String"/>
     </entity>
     <elements>
+        <element name="ChatObject" positionX="-63" positionY="9" width="128" height="88"/>
+        <element name="MessagesObject" positionX="-63" positionY="18" width="128" height="73"/>
         <element name="UserObject" positionX="-63" positionY="-18" width="128" height="88"/>
     </elements>
 </model>
