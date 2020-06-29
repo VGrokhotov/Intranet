@@ -10,10 +10,10 @@ import Foundation
 
 class Message: NSObject, NSCoding {
     
-    var senderID: UUID = UUID()
-    var content: Data = Data()
-    var contentType: ContentType = .text
-    var time: Date = Date()
+    var senderID: UUID
+    var content: Data
+    var contentType: ContentType
+    var time: Date
     
     enum Key: String {
         case senderID = "senderID"

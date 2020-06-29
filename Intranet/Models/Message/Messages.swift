@@ -10,7 +10,7 @@ import Foundation
 
 class Messages: NSObject, NSCoding {
     
-    var messages: [Message] = []
+    var messages: [Message]
     
     enum Key: String {
         case messages = "messages"
