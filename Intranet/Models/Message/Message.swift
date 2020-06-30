@@ -51,4 +51,6 @@ class Message: NSObject, NSCoding {
 enum ContentType {
     case text
     case image
+    case file
+    case unknown
 }

@@ -35,7 +35,7 @@ class ChatViewController: UIViewController {
                
         tableView.register(UINib(nibName: String(describing: ChatCell.self), bundle: Bundle.main), forCellReuseIdentifier: String(describing: ChatCell.self))
         
-        //navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -67,11 +67,16 @@ class ChatViewController: UIViewController {
         newConnectionButton.isEnabled = true
         tableView.isHidden = false
         
+        getLocalChats()
+    }
+    
+    func getLocalChats() {
         chats = ChatsStorageManager.shared.getChats().sorted { (first, second) -> Bool in
             let firstString = first.interlocutorSurname + " " + first.interlocutorName
             let secondString = second.interlocutorSurname + " " + second.interlocutorName
             return firstString < secondString
         }
+        tableView.reloadData()
     }
     
     //MARK: Alerts
@@ -134,14 +139,14 @@ extension ChatViewController: UITableViewDelegate {
 
         tableView.deselectRow(at: indexPath, animated: true)
 
-//        guard
-//            let notVerifiedRoomCell = tableView.cellForRow(at: indexPath) as? RoomCell,
-//            let notVerifiedRoom = notVerifiedRoomCell.notVerifiedRoom
-//        else { return }
-//
-//        let destinationViewController = RoomEnteringViewController.makeVC(with: notVerifiedRoom)
-//
-//        navigationController?.pushViewController(destinationViewController, animated: true)
+        guard
+            let chatCell = tableView.cellForRow(at: indexPath) as? ChatCell,
+            let chat = chatCell.chat
+        else { return }
+
+        let destinationViewController = LocalMessagesViewController.makeVC(with: chat)
+
+        navigationController?.pushViewController(destinationViewController, animated: true)
     }
 }
 
