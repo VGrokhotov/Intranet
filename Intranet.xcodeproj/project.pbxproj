@@ -25,6 +25,9 @@
 		86AB201624A8E468007C60A4 /* UsersStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86AB201524A8E468007C60A4 /* UsersStorageManager.swift */; };
 		86CB163524AA793600A35A51 /* Messages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86CB163424AA793600A35A51 /* Messages.swift */; };
 		86CB163724AA7AC300A35A51 /* MessagesObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86CB163624AA7AC300A35A51 /* MessagesObject.swift */; };
+		86E50E4A24AB77B80054D4D5 /* ChatsStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86E50E4924AB77B80054D4D5 /* ChatsStorageManager.swift */; };
+		86E50E4D24AB7BBC0054D4D5 /* ChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86E50E4B24AB7BBC0054D4D5 /* ChatCell.swift */; };
+		86E50E4E24AB7BBC0054D4D5 /* ChatCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 86E50E4C24AB7BBC0054D4D5 /* ChatCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +51,9 @@
 		86AB201524A8E468007C60A4 /* UsersStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersStorageManager.swift; sourceTree = "<group>"; };
 		86CB163424AA793600A35A51 /* Messages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Messages.swift; sourceTree = "<group>"; };
 		86CB163624AA7AC300A35A51 /* MessagesObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesObject.swift; sourceTree = "<group>"; };
+		86E50E4924AB77B80054D4D5 /* ChatsStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatsStorageManager.swift; sourceTree = "<group>"; };
+		86E50E4B24AB7BBC0054D4D5 /* ChatCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatCell.swift; sourceTree = "<group>"; };
+		86E50E4C24AB7BBC0054D4D5 /* ChatCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +82,8 @@
 			children = (
 				865FA59724AA6FC90020EE30 /* ChatObject.swift */,
 				865FA59924AA705C0020EE30 /* Chat.swift */,
+				86E50E4B24AB7BBC0054D4D5 /* ChatCell.swift */,
+				86E50E4C24AB7BBC0054D4D5 /* ChatCell.xib */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -155,6 +163,7 @@
 			isa = PBXGroup;
 			children = (
 				86AB201524A8E468007C60A4 /* UsersStorageManager.swift */,
+				86E50E4924AB77B80054D4D5 /* ChatsStorageManager.swift */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -218,6 +227,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				86AB200124A8D4D4007C60A4 /* LaunchScreen.storyboard in Resources */,
+				86E50E4E24AB7BBC0054D4D5 /* ChatCell.xib in Resources */,
 				86AB1FFE24A8D4D4007C60A4 /* Assets.xcassets in Resources */,
 				86AB1FF924A8D4CF007C60A4 /* Main.storyboard in Resources */,
 			);
@@ -233,10 +243,12 @@
 				86AB200C24A8DFE0007C60A4 /* BaseExtensions.swift in Sources */,
 				865FA59A24AA705C0020EE30 /* Chat.swift in Sources */,
 				86AB1FF624A8D4CF007C60A4 /* ChatViewController.swift in Sources */,
+				86E50E4D24AB7BBC0054D4D5 /* ChatCell.swift in Sources */,
 				86CB163524AA793600A35A51 /* Messages.swift in Sources */,
 				864EE0CB24A90415007E9D46 /* ProfileViewController.swift in Sources */,
 				86AB201424A8E43A007C60A4 /* UserAuthorization.swift in Sources */,
 				86AB201024A8E31F007C60A4 /* User.swift in Sources */,
+				86E50E4A24AB77B80054D4D5 /* ChatsStorageManager.swift in Sources */,
 				86AB201624A8E468007C60A4 /* UsersStorageManager.swift in Sources */,
 				86AB1FF224A8D4CF007C60A4 /* AppDelegate.swift in Sources */,
 				86AB1FFC24A8D4CF007C60A4 /* Intranet.xcdatamodeld in Sources */,
