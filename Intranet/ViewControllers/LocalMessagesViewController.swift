@@ -42,7 +42,7 @@ class LocalMessagesViewController: UIViewController {
 extension LocalMessagesViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 45
+        return 57
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
