@@ -13,7 +13,7 @@ import CoreData
 class MessagesObject: NSManagedObject {
     
     @NSManaged public var interlocutorID: UUID
-    @NSManaged public var array: Messages
+    @NSManaged public var array: [Message]
 
     @nonobjc public class func fetchRequest() -> NSFetchRequest<MessagesObject> {
         return NSFetchRequest<MessagesObject>(entityName: "MessagesObject");
@@ -24,6 +24,6 @@ class MessagesObject: NSManagedObject {
 
 extension MessagesObject {
     func getMessagesArray() -> [Message] {
-        return self.array.messages
+        return self.array
     }
 }

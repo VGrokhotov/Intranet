@@ -49,7 +49,7 @@ class MessagesStorageManager: MessagesDataManager {
             
             for messagesInContext in allMessages {
                 if messagesInContext.interlocutorID == interlocutorID {
-                    messagesInContext.array.messages = messages
+                    messagesInContext.array = messages
                     existingMessagesModel = messagesInContext
                     break
                 }
@@ -61,7 +61,7 @@ class MessagesStorageManager: MessagesDataManager {
                 let currentMessagesObject = NSEntityDescription.insertNewObject(forEntityName: "MessagesObject", into: context) as? MessagesObject
                 
                 currentMessagesObject?.interlocutorID = interlocutorID
-                currentMessagesObject?.array = Messages(messages: messages)
+                currentMessagesObject?.array = messages
             }
             
             try? context.save()

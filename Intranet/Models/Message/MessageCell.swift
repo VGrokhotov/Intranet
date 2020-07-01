@@ -44,14 +44,14 @@ extension MessageCell: ConfigurableView {
         
         //настройка отображения контента
         switch model.contentType {
-        case .text:
+        case "text":
             textContentLabel.text = String(data: message?.content ?? Data(), encoding: .utf8)
             break
-        case .image:
+        case "image":
             break
-        case .file:
+        case "file":
             break
-        case .unknown:
+        default:
             //не поддерживается
             break
         }

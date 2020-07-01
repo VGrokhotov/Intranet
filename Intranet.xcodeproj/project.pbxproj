@@ -23,7 +23,6 @@
 		86AB201224A8E371007C60A4 /* UserObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86AB201124A8E371007C60A4 /* UserObject.swift */; };
 		86AB201424A8E43A007C60A4 /* UserAuthorization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86AB201324A8E43A007C60A4 /* UserAuthorization.swift */; };
 		86AB201624A8E468007C60A4 /* UsersStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86AB201524A8E468007C60A4 /* UsersStorageManager.swift */; };
-		86CB163524AA793600A35A51 /* Messages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86CB163424AA793600A35A51 /* Messages.swift */; };
 		86CB163724AA7AC300A35A51 /* MessagesObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86CB163624AA7AC300A35A51 /* MessagesObject.swift */; };
 		86E50E4A24AB77B80054D4D5 /* ChatsStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86E50E4924AB77B80054D4D5 /* ChatsStorageManager.swift */; };
 		86E50E4D24AB7BBC0054D4D5 /* ChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86E50E4B24AB7BBC0054D4D5 /* ChatCell.swift */; };
@@ -54,7 +53,6 @@
 		86AB201124A8E371007C60A4 /* UserObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserObject.swift; sourceTree = "<group>"; };
 		86AB201324A8E43A007C60A4 /* UserAuthorization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAuthorization.swift; sourceTree = "<group>"; };
 		86AB201524A8E468007C60A4 /* UsersStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersStorageManager.swift; sourceTree = "<group>"; };
-		86CB163424AA793600A35A51 /* Messages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Messages.swift; sourceTree = "<group>"; };
 		86CB163624AA7AC300A35A51 /* MessagesObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesObject.swift; sourceTree = "<group>"; };
 		86E50E4924AB77B80054D4D5 /* ChatsStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatsStorageManager.swift; sourceTree = "<group>"; };
 		86E50E4B24AB7BBC0054D4D5 /* ChatCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatCell.swift; sourceTree = "<group>"; };
@@ -102,7 +100,6 @@
 			isa = PBXGroup;
 			children = (
 				865FA59D24AA76B70020EE30 /* Message.swift */,
-				86CB163424AA793600A35A51 /* Messages.swift */,
 				86CB163624AA7AC300A35A51 /* MessagesObject.swift */,
 				86E50E5324ABABCC0054D4D5 /* MessageCell.swift */,
 				86E50E5424ABABCC0054D4D5 /* MessageCell.xib */,
@@ -262,7 +259,6 @@
 				86AB1FF624A8D4CF007C60A4 /* ChatViewController.swift in Sources */,
 				86E50E4D24AB7BBC0054D4D5 /* ChatCell.swift in Sources */,
 				86E50E5824ABABF40054D4D5 /* BaseProtocols.swift in Sources */,
-				86CB163524AA793600A35A51 /* Messages.swift in Sources */,
 				86E50E5024ABA5610054D4D5 /* MessagesStorageManager.swift in Sources */,
 				864EE0CB24A90415007E9D46 /* ProfileViewController.swift in Sources */,
 				86AB201424A8E43A007C60A4 /* UserAuthorization.swift in Sources */,

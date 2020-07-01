@@ -6,7 +6,7 @@
         <attribute name="interlocutorSurname" optional="YES" attributeType="String"/>
     </entity>
     <entity name="MessagesObject" representedClassName="MessagesObject" syncable="YES">
-        <attribute name="array" optional="YES" attributeType="Transformable" customClassName="Messages"/>
+        <attribute name="array" optional="YES" attributeType="Transformable" customClassName="[Message]"/>
         <attribute name="interlocutorID" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
     </entity>
     <entity name="UserObject" representedClassName="UserObject" syncable="YES">

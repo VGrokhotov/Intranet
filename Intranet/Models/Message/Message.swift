@@ -12,7 +12,7 @@ class Message: NSObject, NSCoding {
     
     var senderID: UUID
     var content: Data
-    var contentType: ContentType
+    var contentType: String
     var time: Date
     
     enum Key: String {
@@ -22,7 +22,7 @@ class Message: NSObject, NSCoding {
         case time = "time"
     }
     
-    init(senderID: UUID, content: Data, contentType: ContentType, time: Date) {
+    init(senderID: UUID, content: Data, contentType: String, time: Date) {
         self.senderID = senderID
         self.content = content
         self.contentType = contentType
@@ -36,21 +36,17 @@ class Message: NSObject, NSCoding {
         coder.encode(time, forKey: Key.time.rawValue)
     }
     
-    required convenience init?(coder: NSCoder) {
+    required init?(coder: NSCoder) {
         guard
             let senderID = coder.decodeObject(forKey: Key.senderID.rawValue) as? UUID,
             let content = coder.decodeObject(forKey: Key.content.rawValue) as? Data,
-            let contentType = coder.decodeObject(forKey: Key.contentType.rawValue) as? ContentType,
+            let contentType = coder.decodeObject(forKey: Key.contentType.rawValue) as? String,
             let time = coder.decodeObject(forKey: Key.time.rawValue) as? Date
         else { return nil }
         
-        self.init(senderID: senderID, content: content, contentType: contentType, time: time)
+        self.senderID = senderID
+        self.content = content
+        self.contentType = contentType
+        self.time = time
     }
-}
-
-enum ContentType {
-    case text
-    case image
-    case file
-    case unknown
 }
