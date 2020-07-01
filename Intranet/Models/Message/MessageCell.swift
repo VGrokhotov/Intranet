@@ -68,7 +68,25 @@ extension MessageCell: ConfigurableView {
             NSLayoutConstraint.activate([leftConstraint])
         }
         
-        timeLabel.text = model.time.description
+        let date = model.time
+        
+        let today = Date() // сегодня
+        let calendar = Calendar.current
+            
+        let date0 = Calendar.current.startOfDay(for: today)//now 00:00
+        let dateFormatterPrint = DateFormatter()
+
+        if (calendar.compare(date0, to: date, toGranularity: .day) == .orderedDescending){
+            if (calendar.compare(date0, to: date, toGranularity: .year) == .orderedDescending){
+                dateFormatterPrint.dateFormat = "dd MMM, yyyy"
+            } else{
+                dateFormatterPrint.dateFormat = "dd MMM"
+            }
+        } else{
+            dateFormatterPrint.dateFormat = "HH:mm"
+        }
+        
+        timeLabel.text  = dateFormatterPrint.string(from: date)
         
     }
     
