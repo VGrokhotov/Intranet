@@ -17,14 +17,27 @@ class LocalMessagesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+       //MessagesStorageManager.shared.saveMessages(interlocutorID: UUID(uuidString: "AAF96E48-04C8-4D3E-9003-F69ABAB6993A")!, messages: [ Message(senderID: UUID(uuidString: "AAF96E48-04C8-4D3E-9003-F69ABAB6993A")!, content: Data("zo".utf8), contentType: "text", time: Date()), Message(senderID: UserAuthorization.shared.user!.id, content: Data("zo".utf8), contentType: "text", time: Date() )], completion: {})
 
+        //(interlocutorID: ED38CB45-1A45-42A2-A049-388D0777B64E, interlocutorName: "lol", interlocutorSurname: "kek")
+        //(interlocutorID: A3C55938-17E5-42F9-8869-251AAA8B00BC, interlocutorName: "lo", interlocutorSurname: "zo")
+        //(interlocutorID: AAF96E48-04C8-4D3E-9003-F69ABAB6993A, interlocutorName: "zo", interlocutorSurname: "zo")
         title = (chat?.interlocutorSurname ?? "") + " " + (chat?.interlocutorName ?? "")
         
         tableView.delegate = self
         tableView.dataSource = self
         tableView.tableFooterView = UIView()
                
-        tableView.register(UINib(nibName: String(describing: ChatCell.self), bundle: Bundle.main), forCellReuseIdentifier: String(describing: ChatCell.self))
+        tableView.register(UINib(nibName: String(describing: MessageCell.self), bundle: Bundle.main), forCellReuseIdentifier: String(describing: MessageCell.self))
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        guard let chat = chat else { return }
+        
+        messages = MessagesStorageManager.shared.getMessagesWith(interlocutorID: chat.interlocutorID)
     }
     
     static func makeVC(with chat: Chat) -> LocalMessagesViewController {
