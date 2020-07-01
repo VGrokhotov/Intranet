@@ -11,7 +11,7 @@ import CoreData
 
 protocol MessagesDataManager {
     
-    func saveMessages(interlocutorID: UUID, messages: [Message], completion: @escaping () -> ())
+    func saveNewMessages(interlocutorID: UUID, messages: [Message], completion: @escaping () -> ())
     
     func getMessagesWith(interlocutorID: UUID) -> [Message]
     
@@ -39,7 +39,7 @@ class MessagesStorageManager: MessagesDataManager {
     }()
     
     
-    func saveMessages(interlocutorID: UUID, messages: [Message], completion: @escaping () -> ()) {
+    func saveNewMessages(interlocutorID: UUID, messages: [Message], completion: @escaping () -> ()) {
         
         container.performBackgroundTask { (context) in
             
@@ -49,14 +49,13 @@ class MessagesStorageManager: MessagesDataManager {
             
             for messagesInContext in allMessages {
                 if messagesInContext.interlocutorID == interlocutorID {
-                    messagesInContext.array = messages
                     existingMessagesModel = messagesInContext
                     break
                 }
             }
             
-            if let _ = existingMessagesModel {
-                
+            if let existingMessagesModel = existingMessagesModel {
+                existingMessagesModel.array.append(contentsOf: messages)
             } else {
                 let currentMessagesObject = NSEntityDescription.insertNewObject(forEntityName: "MessagesObject", into: context) as? MessagesObject
                 

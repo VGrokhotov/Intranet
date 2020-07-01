@@ -18,7 +18,7 @@ class LocalMessagesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-       //MessagesStorageManager.shared.saveMessages(interlocutorID: UUID(uuidString: "AAF96E48-04C8-4D3E-9003-F69ABAB6993A")!, messages: [ Message(senderID: UUID(uuidString: "AAF96E48-04C8-4D3E-9003-F69ABAB6993A")!, content: Data("zo".utf8), contentType: "text", time: Date()), Message(senderID: UserAuthorization.shared.user!.id, content: Data("zo".utf8), contentType: "text", time: Date() )], completion: {})
+        //MessagesStorageManager.shared.saveNewMessages(interlocutorID: UUID(uuidString: "ED38CB45-1A45-42A2-A049-388D0777B64E")!, messages: [ Message(senderID: UUID(uuidString: "ED38CB45-1A45-42A2-A049-388D0777B64E")!, content: Data("loool".utf8), contentType: "text", time: Date()), Message(senderID: UserAuthorization.shared.user!.id, content: Data("keeeek".utf8), contentType: "text", time: Date() + 1 )], completion: {})
 
         //(interlocutorID: ED38CB45-1A45-42A2-A049-388D0777B64E, interlocutorName: "lol", interlocutorSurname: "kek")
         //(interlocutorID: A3C55938-17E5-42F9-8869-251AAA8B00BC, interlocutorName: "lo", interlocutorSurname: "zo")
@@ -38,6 +38,9 @@ class LocalMessagesViewController: UIViewController {
         guard let chat = chat else { return }
         
         messages = MessagesStorageManager.shared.getMessagesWith(interlocutorID: chat.interlocutorID)
+            .sorted(by: { (first, second) -> Bool in
+                return first.time < second.time
+            })
     }
     
     static func makeVC(with chat: Chat) -> LocalMessagesViewController {
