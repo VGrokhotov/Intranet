@@ -21,6 +21,22 @@ class ConnectionViewController: UIViewController {
     var mcSession: MCSession!
     var mcAdvertiserAssistant: MCAdvertiserAssistant!
     
+    @IBAction func startingConnectionButtonPressed(_ sender: Any) {
+        
+        let allert = UIAlertController(title: "Connect to others", message: nil, preferredStyle: .alert)
+        
+        let join = UIAlertAction(title: "Join a session", style: .default, handler: joinSession(action:))
+        
+        let host = UIAlertAction(title: "Host a session", style: .default, handler: startHosting(action:))
+        
+        let cansel = UIAlertAction(title: "Canсel", style: .cancel)
+        
+        allert.addAction(host)
+        allert.addAction(join)
+        allert.addAction(cansel)
+        present(allert, animated: true)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -31,14 +47,28 @@ class ConnectionViewController: UIViewController {
         mcSession = MCSession(peer: peerID, securityIdentity: nil, encryptionPreference: .required)
         mcSession.delegate = self
         
+        title = "Chat"
+        
         tableView.delegate = self
         tableView.dataSource = self
         tableView.tableFooterView = UIView()
                
         tableView.register(UINib(nibName: String(describing: MessageCell.self), bundle: Bundle.main), forCellReuseIdentifier: String(describing: MessageCell.self))
+        
+        startAlert()
 
     }
     
+    //MARK: Alerts
+    
+    func startAlert(){
+        
+        let allert = UIAlertController(title: nil, message: "To continue, you should start or join a session by clicking on the button in the upper right corner", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "Ok", style: .default)
+        
+        allert.addAction(okAction)
+        present(allert, animated: true)
+    }
     
 
 }
@@ -46,12 +76,12 @@ class ConnectionViewController: UIViewController {
 extension ConnectionViewController:  MCSessionDelegate, MCBrowserViewControllerDelegate {
     
     func startHosting(action: UIAlertAction!) {
-        mcAdvertiserAssistant = MCAdvertiserAssistant(serviceType: "hws-kb", discoveryInfo: nil, session: mcSession)
+        mcAdvertiserAssistant = MCAdvertiserAssistant(serviceType: "Intranet", discoveryInfo: nil, session: mcSession)
         mcAdvertiserAssistant.start()
     }
 
     func joinSession(action: UIAlertAction!) {
-        let mcBrowser = MCBrowserViewController(serviceType: "hws-kb", session: mcSession)
+        let mcBrowser = MCBrowserViewController(serviceType: "Intranet", session: mcSession)
         mcBrowser.delegate = self
         present(mcBrowser, animated: true)
     }

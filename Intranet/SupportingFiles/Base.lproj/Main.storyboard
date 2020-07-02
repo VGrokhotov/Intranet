@@ -87,7 +87,13 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="cVQ-D0-Ebp"/>
                     </view>
-                    <navigationItem key="navigationItem" id="qCX-h9-Vtx"/>
+                    <navigationItem key="navigationItem" id="qCX-h9-Vtx">
+                        <barButtonItem key="rightBarButtonItem" image="paperplane" catalog="system" id="ChZ-cA-tG7">
+                            <connections>
+                                <action selector="startingConnectionButtonPressed:" destination="LEf-4r-buS" id="Cxt-gd-Ab7"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="activityIndicator" destination="oxV-cL-cD3" id="ALU-hj-xni"/>
                         <outlet property="tableView" destination="Urp-wf-fzk" id="D3X-JA-t30"/>
@@ -230,6 +236,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="paperplane" catalog="system" width="128" height="121"/>
         <image name="person.crop.circle.badge.xmark" catalog="system" width="128" height="101"/>
         <image name="plus" catalog="system" width="128" height="113"/>
     </resources>
