@@ -13,3 +13,9 @@ struct User {
     let name: String
     let surname: String
 }
+
+extension User {
+    func getFullName() -> String {
+        return surname + " " + name
+    }
+}

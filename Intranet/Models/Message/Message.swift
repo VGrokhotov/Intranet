@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Message: NSObject, NSCoding {
+class Message: NSObject, NSCoding, Codable {
     
     var senderID: UUID
     var content: Data
@@ -52,7 +52,7 @@ class Message: NSObject, NSCoding {
     }
 }
 
-enum ContentType: String {
+enum ContentType: String, Codable{
     case text = "text"
     case image = "image"
     case file = "file"
