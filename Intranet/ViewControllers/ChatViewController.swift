@@ -72,8 +72,8 @@ class ChatViewController: UIViewController {
     
     func getLocalChats() {
         chats = ChatsStorageManager.shared.getChats().sorted { (first, second) -> Bool in
-            let firstString = first.interlocutorSurname + " " + first.interlocutorName
-            let secondString = second.interlocutorSurname + " " + second.interlocutorName
+            let firstString = first.getFullName()
+            let secondString = second.getFullName()
             return firstString < secondString
         }
         tableView.reloadData()

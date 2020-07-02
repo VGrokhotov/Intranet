@@ -23,7 +23,7 @@ class LocalMessagesViewController: UIViewController {
         //(interlocutorID: ED38CB45-1A45-42A2-A049-388D0777B64E, interlocutorName: "lol", interlocutorSurname: "kek")
         //(interlocutorID: A3C55938-17E5-42F9-8869-251AAA8B00BC, interlocutorName: "lo", interlocutorSurname: "zo")
         //(interlocutorID: AAF96E48-04C8-4D3E-9003-F69ABAB6993A, interlocutorName: "zo", interlocutorSurname: "zo")
-        title = (chat?.interlocutorSurname ?? "") + " " + (chat?.interlocutorName ?? "")
+        title = chat?.getFullName()
         
         tableView.delegate = self
         tableView.dataSource = self

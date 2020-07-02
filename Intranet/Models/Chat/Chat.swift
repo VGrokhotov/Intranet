@@ -13,3 +13,9 @@ struct Chat {
     let interlocutorName: String
     let interlocutorSurname: String
 }
+
+extension Chat {
+    func getFullName() -> String {
+        return interlocutorSurname + " " + interlocutorName
+    }
+}
