@@ -223,6 +223,8 @@ class ConnectionViewController: UIViewController, UINavigationControllerDelegate
                 DispatchQueue.main.async { [weak self] in
                     self?.title = user.getFullName()
                     self?.interlocutor = user
+                    self?.messages = MessagesStorageManager.shared.getMessagesWith(interlocutorID: user.id)
+                    self?.tableView.reloadData()
                     print("\(user) got")
                 }
             }
