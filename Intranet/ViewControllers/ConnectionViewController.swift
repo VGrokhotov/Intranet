@@ -9,7 +9,7 @@
 import UIKit
 import MultipeerConnectivity
 
-class ConnectionViewController: UIViewController {
+class ConnectionViewController: UIViewController, UINavigationControllerDelegate, MCSessionDelegate, MCBrowserViewControllerDelegate  {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
@@ -23,7 +23,7 @@ class ConnectionViewController: UIViewController {
     
     @IBAction func startingConnectionButtonPressed(_ sender: Any) {
         
-        let allert = UIAlertController(title: "Connect to others", message: nil, preferredStyle: .alert)
+        let allert = UIAlertController(title: "Connect to others", message: nil, preferredStyle: .actionSheet)
         
         let join = UIAlertAction(title: "Join a session", style: .default, handler: joinSession(action:))
         
@@ -69,11 +69,6 @@ class ConnectionViewController: UIViewController {
         allert.addAction(okAction)
         present(allert, animated: true)
     }
-    
-
-}
-
-extension ConnectionViewController:  MCSessionDelegate, MCBrowserViewControllerDelegate {
     
     func startHosting(action: UIAlertAction!) {
         mcAdvertiserAssistant = MCAdvertiserAssistant(serviceType: "Intranet", discoveryInfo: nil, session: mcSession)
