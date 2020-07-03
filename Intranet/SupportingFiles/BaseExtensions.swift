@@ -45,6 +45,13 @@ extension UIViewController {
         button.clipsToBounds = true
     }
     
+    func configurate(textView: UITextView) {
+        textView.layer.cornerRadius = 10
+        textView.layer.borderWidth = 0.5
+        textView.layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        textView.clipsToBounds = true
+    }
+    
     //MARK: To dismiss keyboard after tapping anywhere else
     
     func setupToHideKeyboardOnTapOnView() {

@@ -13,13 +13,30 @@ class ConnectionViewController: UIViewController, UINavigationControllerDelegate
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var messageTextView: UITextView!
+    @IBOutlet weak var sendButton: UIButton!
+    @IBOutlet weak var photoButton: UIButton!
+    @IBOutlet weak var clipButton: UIButton!
+    @IBOutlet weak var startConnectionButton: UIBarButtonItem!
     
     var messages: [Message] = []
     var newMessages: [Message] = []
+    var hasResivedInterlocutorInfo = false
+    var interlocutor: User?
     
     var peerID: MCPeerID!
     var mcSession: MCSession!
     var mcAdvertiserAssistant: MCAdvertiserAssistant!
+    
+    @IBAction func sendButtonPressed(_ sender: Any) {
+        
+    }
+    @IBAction func photoButtonPressed(_ sender: Any) {
+        
+    }
+    @IBAction func clipButtonPressed(_ sender: Any) {
+        
+    }
     
     @IBAction func startingConnectionButtonPressed(_ sender: Any) {
         
@@ -49,6 +66,17 @@ class ConnectionViewController: UIViewController, UINavigationControllerDelegate
         
         title = "Chat"
         
+        setupToHideKeyboardOnTapOnView()
+        
+        registerForKeyboardNotification()
+        
+        sendButton.isEnabled = false
+        
+        configurate(textView: messageTextView)
+        disableViews()
+        
+        messageTextView.delegate = self
+        
         tableView.delegate = self
         tableView.dataSource = self
         tableView.tableFooterView = UIView()
@@ -57,6 +85,20 @@ class ConnectionViewController: UIViewController, UINavigationControllerDelegate
         
         startAlert()
 
+    }
+    
+    deinit {
+        removeKeyboardNotification()
+    }
+    
+    func disableViews() {
+        messageTextView.isEditable = false
+        disable(views: sendButton, photoButton, clipButton)
+    }
+    
+    func activateViews() {
+        messageTextView.isEditable = true
+        activate(views: photoButton, clipButton)
     }
     
     //MARK: Alerts
@@ -69,6 +111,8 @@ class ConnectionViewController: UIViewController, UINavigationControllerDelegate
         allert.addAction(okAction)
         present(allert, animated: true)
     }
+    
+    //MARK: Multipeer Connectivity
     
     func startHosting(action: UIAlertAction!) {
         mcAdvertiserAssistant = MCAdvertiserAssistant(serviceType: "Intranet", discoveryInfo: nil, session: mcSession)
@@ -85,6 +129,11 @@ class ConnectionViewController: UIViewController, UINavigationControllerDelegate
         switch state {
         case MCSessionState.connected:
             print("Connected: \(peerID.displayName)")
+            
+            DispatchQueue.main.async { [weak self] in
+                self?.activateViews()
+                self?.startConnectionButton.isEnabled = false
+            }
 
         case MCSessionState.connecting:
             print("Connecting: \(peerID.displayName)")
@@ -143,6 +192,8 @@ class ConnectionViewController: UIViewController, UINavigationControllerDelegate
     
 }
 
+    //MARK: Work with table
+
 
 extension ConnectionViewController: UITableViewDelegate {
     
@@ -175,4 +226,81 @@ extension ConnectionViewController: UITableViewDataSource {
     }
     
     
+}
+
+
+// MARK: - Text field delegate
+
+extension ConnectionViewController: UITextViewDelegate {
+    
+    func textViewDidChange(_ textView: UITextView) {
+        if textView.text?.count == 0{
+            
+            increasingPlusDecreasingAnimation(button: sendButton, isEnable: false)
+            sendButton.isEnabled = false
+        }
+        else{
+            if !sendButton.isEnabled {
+                self.sendButton.isEnabled = true
+                increasingPlusDecreasingAnimation(button: sendButton, isEnable: true)
+            }
+        }
+    }
+    
+    func increasingPlusDecreasingAnimation(button: UIButton, isEnable: Bool) {
+        
+        UIView.animateKeyframes(
+            withDuration: 1,
+            delay: 0,
+            animations: {
+                
+                UIView.addKeyframe(
+                    withRelativeStartTime: 0,
+                    relativeDuration: 0.5) {
+                        button.transform = CGAffineTransform(scaleX: 1.15, y: 1.15)
+                }
+                
+                UIView.addKeyframe(
+                    withRelativeStartTime: 0.5,
+                    relativeDuration: 0.5) {
+                        button.transform = CGAffineTransform(scaleX: 1, y: 1)
+                }
+                
+        }, completion: nil)
+    }
+}
+
+
+
+//MARK: Show the content above the keyboard
+
+extension ConnectionViewController{
+    
+    func registerForKeyboardNotification(){
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    func removeKeyboardNotification(){
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    @objc func keyboardWillShow(notification: NSNotification) {
+
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            
+            tableView.setContentOffset(CGPoint(x: 0, y: tableView.contentOffset.y + keyboardSize.size.height), animated: true)
+            self.view.frame.size.height -= keyboardSize.size.height
+            
+        }
+    }
+    
+
+    @objc func keyboardWillHide(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            self.view.frame.size.height += keyboardSize.size.height
+            //tableView.setContentOffset(CGPoint(x: 0, y:             tableView.contentOffset.y - keyboardSize.height), animated: true)
+        }
+    }
 }
