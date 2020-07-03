@@ -19,3 +19,9 @@ extension User {
         return surname + " " + name
     }
 }
+
+extension User {
+    func toChat() -> Chat {
+        return Chat(interlocutorID: id, interlocutorName: name, interlocutorSurname: surname)
+    }
+}
