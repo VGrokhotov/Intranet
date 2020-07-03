@@ -105,6 +105,8 @@ class ConnectionViewController: UIViewController, UINavigationControllerDelegate
         removeKeyboardNotification()
     }
     
+    //MARK: Actions with views
+    
     func disableViews() {
         messageTextView.isEditable = false
         disable(views: sendButton, photoButton, clipButton)
@@ -113,6 +115,44 @@ class ConnectionViewController: UIViewController, UINavigationControllerDelegate
     func activateViews() {
         messageTextView.isEditable = true
         activate(views: photoButton, clipButton)
+    }
+    
+    func changeRightButton() {
+        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(closeSessionAllert))
+        navigationItem.rightBarButtonItem = UIBarButtonItem()
+    }
+    
+    @objc func closeSessionAllert() {
+        let ac = UIAlertController(title: "Do you really want to close the session?", message: nil, preferredStyle: .alert)
+        
+        let yesAction = UIAlertAction(title: "Yes", style: .default) { [weak self] _ in
+            self?.closeSession()
+        }
+        
+        let cancelAction = UIAlertAction(title: "No", style: .cancel)
+        
+        ac.addAction(cancelAction)
+        ac.addAction(yesAction)
+        present(ac, animated: true)
+    }
+    
+    func closeSession() {
+        guard let interlocutor = interlocutor else { return }
+        activityIndicator.startAnimating()
+        disableViews()
+        tableView.isHidden = true
+        ChatsStorageManager.shared.saveChat(chat: interlocutor.toChat()) { [weak self] in
+            guard let newMessages = self?.newMessages else {
+                self?.activityIndicator.stopAnimating()
+                self?.activateViews()
+                self?.tableView.isHidden = false
+                return
+            }
+            MessagesStorageManager.shared.saveNewMessages(interlocutorID: interlocutor.id, messages: newMessages) { [weak self] in
+                self?.activityIndicator.stopAnimating()
+                self?.successAlert()
+            }
+        }
     }
     
     //MARK: Alerts
@@ -125,6 +165,18 @@ class ConnectionViewController: UIViewController, UINavigationControllerDelegate
         allert.addAction(okAction)
         present(allert, animated: true)
     }
+    
+    func successAlert(){
+        
+        let allert = UIAlertController(title: "Success", message: "All messages saved successfully!", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default) { [weak self] _ in
+            self?.navigationController?.popViewController(animated: true)
+        }
+        
+        allert.addAction(okAction)
+        present(allert, animated: true)
+    }
+
     
     //MARK: Multipeer Connectivity
     
@@ -146,7 +198,8 @@ class ConnectionViewController: UIViewController, UINavigationControllerDelegate
             
             DispatchQueue.main.async { [weak self] in
                 self?.activateViews()
-                self?.startConnectionButton.isEnabled = false
+                //self?.startConnectionButton.isEnabled = false
+                self?.changeRightButton()
                 guard let user = UserAuthorization.shared.user else { return }
                 self?.send(userInfo: user)
                 print("\(user) sended ")
@@ -168,6 +221,7 @@ class ConnectionViewController: UIViewController, UINavigationControllerDelegate
             hasResivedInterlocutorInfo = true
             if let user = try? JSONDecoder().decode(User.self, from: data) {
                 DispatchQueue.main.async { [weak self] in
+                    self?.title = user.getFullName()
                     self?.interlocutor = user
                     print("\(user) got")
                 }
