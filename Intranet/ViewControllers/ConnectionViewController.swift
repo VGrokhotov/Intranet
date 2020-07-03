@@ -43,13 +43,14 @@ class ConnectionViewController: UIViewController, UINavigationControllerDelegate
         messageTextView.text = ""
         increasingPlusDecreasingAnimation(button: sendButton, isEnable: false)
         sendButton.isEnabled = false
+        scrollDown(animated: true)
     }
     
     @IBAction func photoButtonPressed(_ sender: Any) {
-        
+        scrollDown(animated: true)
     }
     @IBAction func clipButtonPressed(_ sender: Any) {
-        
+        scrollDown(animated: true)
     }
     
     @IBAction func startingConnectionButtonPressed(_ sender: Any) {
@@ -225,6 +226,7 @@ class ConnectionViewController: UIViewController, UINavigationControllerDelegate
                     self?.interlocutor = user
                     self?.messages = MessagesStorageManager.shared.getMessagesWith(interlocutorID: user.id)
                     self?.tableView.reloadData()
+                    self?.scrollDown(animated: true)
                     print("\(user) got")
                 }
             }
@@ -234,6 +236,7 @@ class ConnectionViewController: UIViewController, UINavigationControllerDelegate
                     print("\(message) got")
                     self?.messages.append(message)
                     self?.tableView.reloadData()
+                    self?.scrollDown(animated: true)
                     self?.newMessages.append(message)
                 }
             }
@@ -365,6 +368,16 @@ extension ConnectionViewController: UITextViewDelegate {
                 }
                 
         }, completion: nil)
+    }
+    
+    func scrollDown(animated: Bool){
+        let amountOfMessages =  messages.count
+        
+        if amountOfMessages > 0 {
+            let lastIndex = IndexPath(row: amountOfMessages - 1, section: 0)
+            self.tableView.scrollToRow(at: lastIndex, at: .bottom, animated: animated)
+        }
+        
     }
 }
 

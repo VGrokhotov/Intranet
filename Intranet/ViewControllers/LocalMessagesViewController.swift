@@ -43,6 +43,12 @@ class LocalMessagesViewController: UIViewController {
             })
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        scrollDown(animated: true)
+    }
+    
     static func makeVC(with chat: Chat) -> LocalMessagesViewController {
         
         let newViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: String(describing: LocalMessagesViewController.self)) as? LocalMessagesViewController
@@ -64,6 +70,16 @@ extension LocalMessagesViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    func scrollDown(animated: Bool){
+        let amountOfMessages =  messages.count
+        
+        if amountOfMessages > 0 {
+            let lastIndex = IndexPath(row: amountOfMessages - 1, section: 0)
+            self.tableView.scrollToRow(at: lastIndex, at: .bottom, animated: animated)
+        }
+        
     }
 }
 
