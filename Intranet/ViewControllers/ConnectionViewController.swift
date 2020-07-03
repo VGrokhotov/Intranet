@@ -29,8 +29,22 @@ class ConnectionViewController: UIViewController, UINavigationControllerDelegate
     var mcAdvertiserAssistant: MCAdvertiserAssistant!
     
     @IBAction func sendButtonPressed(_ sender: Any) {
+        guard
+            let user = UserAuthorization.shared.user,
+            let text = messageTextView.text.data(using: .utf8)
+        else { return }
         
+        let newMessage = Message(senderID: user.id, content: text, contentType: .text, time: Date())
+        send(message: newMessage)
+        print("\(newMessage) sended ")
+        newMessages.append(newMessage)
+        messages.append(newMessage)
+        tableView.reloadData()
+        messageTextView.text = ""
+        increasingPlusDecreasingAnimation(button: sendButton, isEnable: false)
+        sendButton.isEnabled = false
     }
+    
     @IBAction func photoButtonPressed(_ sender: Any) {
         
     }
@@ -133,6 +147,9 @@ class ConnectionViewController: UIViewController, UINavigationControllerDelegate
             DispatchQueue.main.async { [weak self] in
                 self?.activateViews()
                 self?.startConnectionButton.isEnabled = false
+                guard let user = UserAuthorization.shared.user else { return }
+                self?.send(userInfo: user)
+                print("\(user) sended ")
             }
 
         case MCSessionState.connecting:
@@ -147,11 +164,22 @@ class ConnectionViewController: UIViewController, UINavigationControllerDelegate
     }
     
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
-        if let message = try? JSONDecoder().decode(Message.self, from: data) {
-            DispatchQueue.main.async { [weak self] in
-                self?.messages.append(message)
-                self?.tableView.layoutIfNeeded()
-                self?.newMessages.append(message)
+        if !hasResivedInterlocutorInfo {
+            hasResivedInterlocutorInfo = true
+            if let user = try? JSONDecoder().decode(User.self, from: data) {
+                DispatchQueue.main.async { [weak self] in
+                    self?.interlocutor = user
+                    print("\(user) got")
+                }
+            }
+        } else {
+            if let message = try? JSONDecoder().decode(Message.self, from: data) {
+                DispatchQueue.main.async { [weak self] in
+                    print("\(message) got")
+                    self?.messages.append(message)
+                    self?.tableView.reloadData()
+                    self?.newMessages.append(message)
+                }
             }
         }
     }
@@ -174,6 +202,20 @@ class ConnectionViewController: UIViewController, UINavigationControllerDelegate
     
     func browserViewControllerWasCancelled(_ browserViewController: MCBrowserViewController) {
         dismiss(animated: true)
+    }
+    
+    func send(userInfo: User) {
+        if mcSession.connectedPeers.count > 0 {
+            if let userInfo = try? JSONEncoder().encode(userInfo) {
+                do {
+                    try mcSession.send(userInfo, toPeers: mcSession.connectedPeers, with: .reliable)
+                } catch let error as NSError {
+                    let ac = UIAlertController(title: "Send error", message: error.localizedDescription, preferredStyle: .alert)
+                    ac.addAction(UIAlertAction(title: "OK", style: .default))
+                    present(ac, animated: true)
+                }
+            }
+        }
     }
     
     func send(message: Message) {
