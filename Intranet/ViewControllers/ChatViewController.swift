@@ -148,6 +148,18 @@ extension ChatViewController: UITableViewDelegate {
 
         navigationController?.pushViewController(destinationViewController, animated: true)
     }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let chat = chats[indexPath.row]
+        chats.remove(at: indexPath.row)
+        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") {  (_, _, _) in
+            ChatsStorageManager.shared.deleteChatWith(id: chat.interlocutorID, completion: {})
+            MessagesStorageManager.shared.deleteMessagesWith(interlocutorID: chat.interlocutorID, completion: {})
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+        }
+        return UISwipeActionsConfiguration(actions: [deleteAction])
+
+    }
 }
 
 extension ChatViewController: UITableViewDataSource {
