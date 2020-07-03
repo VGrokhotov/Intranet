@@ -13,7 +13,6 @@
 		865FA59E24AA76B70020EE30 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 865FA59D24AA76B70020EE30 /* Message.swift */; };
 		8664EABE24AE309E0078963D /* ConnectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8664EABD24AE309E0078963D /* ConnectionViewController.swift */; };
 		86AB1FF224A8D4CF007C60A4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86AB1FF124A8D4CF007C60A4 /* AppDelegate.swift */; };
-		86AB1FF424A8D4CF007C60A4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86AB1FF324A8D4CF007C60A4 /* SceneDelegate.swift */; };
 		86AB1FF624A8D4CF007C60A4 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86AB1FF524A8D4CF007C60A4 /* ChatViewController.swift */; };
 		86AB1FF924A8D4CF007C60A4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86AB1FF724A8D4CF007C60A4 /* Main.storyboard */; };
 		86AB1FFC24A8D4CF007C60A4 /* Intranet.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 86AB1FFA24A8D4CF007C60A4 /* Intranet.xcdatamodeld */; };
@@ -43,7 +42,6 @@
 		8664EABD24AE309E0078963D /* ConnectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionViewController.swift; sourceTree = "<group>"; };
 		86AB1FEE24A8D4CF007C60A4 /* Intranet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Intranet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		86AB1FF124A8D4CF007C60A4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		86AB1FF324A8D4CF007C60A4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		86AB1FF524A8D4CF007C60A4 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		86AB1FF824A8D4CF007C60A4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		86AB1FFB24A8D4CF007C60A4 /* Intranet.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Intranet.xcdatamodel; sourceTree = "<group>"; };
@@ -133,7 +131,6 @@
 				86AB200A24A8DF56007C60A4 /* Models */,
 				86AB200924A8DF4D007C60A4 /* SupportingFiles */,
 				86AB1FF124A8D4CF007C60A4 /* AppDelegate.swift */,
-				86AB1FF324A8D4CF007C60A4 /* SceneDelegate.swift */,
 				86AB200224A8D4D4007C60A4 /* Info.plist */,
 			);
 			path = Intranet;
@@ -275,7 +272,6 @@
 				865FA59E24AA76B70020EE30 /* Message.swift in Sources */,
 				865FA59824AA6FC90020EE30 /* ChatObject.swift in Sources */,
 				86CB163724AA7AC300A35A51 /* MessagesObject.swift in Sources */,
-				86AB1FF424A8D4CF007C60A4 /* SceneDelegate.swift in Sources */,
 				86AB201224A8E371007C60A4 /* UserObject.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
