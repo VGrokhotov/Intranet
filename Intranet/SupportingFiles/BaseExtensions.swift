@@ -67,3 +67,58 @@ extension UIViewController {
         view.endEditing(true)
     }
 }
+
+extension UIImageView {
+    
+    var contentClippingRect: CGRect {
+        
+        guard let image = image else { return bounds }
+        guard contentMode == .scaleAspectFit else { return bounds }
+        guard image.size.width > 0 && image.size.height > 0 else { return bounds }
+
+        let scale: CGFloat
+        if image.size.width > image.size.height {
+            scale = bounds.width / image.size.width
+        } else {
+            scale = bounds.height / image.size.height
+        }
+
+        let size = CGSize(width: image.size.width * scale, height: image.size.height * scale)
+        let x = (bounds.width - size.width) / 2.0
+        let y = (bounds.height - size.height) / 2.0
+
+        return CGRect(x: x, y: y, width: size.width, height: size.height)
+    }
+
+}
+
+extension UIImage {
+    
+    static func resizedCroppedImage(image: UIImage, newSize:CGSize) -> UIImage? {
+
+        var ratio: CGFloat = 0
+        var delta: CGFloat = 0
+        var drawRect = CGRect()
+
+        if newSize.width > newSize.height {
+
+            ratio = newSize.width / image.size.width
+            delta = (ratio * image.size.height) - newSize.height
+            drawRect = CGRect(x: 0, y: -delta / 2, width: newSize.width, height: newSize.height + delta)
+
+        } else {
+
+            ratio = newSize.height / image.size.height
+            delta = (ratio * image.size.width) - newSize.width
+            drawRect = CGRect(x: -delta / 2, y: 0, width: newSize.width + delta, height: newSize.height)
+
+        }
+
+        UIGraphicsBeginImageContextWithOptions(newSize, true, 0.0)
+        image.draw(in: drawRect)
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+
+        return newImage
+    }
+}

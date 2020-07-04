@@ -466,6 +466,9 @@ extension ConnectionViewController: UIImagePickerControllerDelegate {
         
         let newMessage = Message(senderID: user.id, content: imageData, contentType: .image, time: Date())
         send(message: newMessage)
+        newMessages.append(newMessage)
+        messages.append(newMessage)
+        tableView.reloadData()
         
         dismiss(animated: true)
         scrollDown(animated: true)

@@ -13,9 +13,28 @@ class MessageCell: UITableViewCell {
     @IBOutlet weak var textContentLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var messageView: UIView!
+    @IBOutlet weak var messegeImageView: UIImageView!
+    
     
     @IBOutlet weak var leftConstraint: NSLayoutConstraint!
     @IBOutlet weak var rightConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var topTextConstraint: NSLayoutConstraint!
+    @IBOutlet weak var leftTextConstraint: NSLayoutConstraint!
+    @IBOutlet weak var rightTextConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var timeAndTextConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var rightTimeConstraint: NSLayoutConstraint!
+    @IBOutlet weak var leftTimeConstraint: NSLayoutConstraint!
+    @IBOutlet weak var bottomTimeConstraint: NSLayoutConstraint!
+    @IBOutlet weak var timeHeightConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var bottomImageConstraint: NSLayoutConstraint!
+    @IBOutlet weak var rightImageConstraint: NSLayoutConstraint!
+    @IBOutlet weak var topImageConstraint: NSLayoutConstraint!
+    @IBOutlet weak var leftImageConstraint: NSLayoutConstraint!
+    
     
     var message: Message?
 
@@ -33,6 +52,27 @@ class MessageCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    func deactivateTextLabel() {
+        textContentLabel.text = ""
+        textContentLabel.isHidden = true
+        //NSLayoutConstraint.deactivate([leftTextConstraint, rightTextConstraint, topTextConstraint, timeAndTextConstraint])
+    }
+    
+    func deactivateImageView() {
+        messegeImageView.image = nil
+        messegeImageView.isHidden = true
+    }
+    
+    func activateTextLabel() {
+        textContentLabel.isHidden = false
+        NSLayoutConstraint.activate([leftTextConstraint, rightTextConstraint, topTextConstraint, timeAndTextConstraint])
+    }
+    
+    func activateImageView() {
+        messegeImageView.isHidden = false
+        NSLayoutConstraint.activate([leftImageConstraint, rightImageConstraint, topImageConstraint, bottomImageConstraint])
+    }
+    
 }
 
 extension MessageCell: ConfigurableView {
@@ -45,9 +85,23 @@ extension MessageCell: ConfigurableView {
         //настройка отображения контента
         switch model.contentType {
         case .text:
+            deactivateImageView()
+            activateTextLabel()
             textContentLabel.text = String(data: message?.content ?? Data(), encoding: .utf8)
             break
         case .image:
+            deactivateTextLabel()
+            activateImageView()
+            messegeImageView.layer.cornerRadius = 10
+            messegeImageView.contentMode = .scaleAspectFit
+            messegeImageView.clipsToBounds = true
+            if let image = UIImage.init(data: message?.content ?? Data()) {
+                messegeImageView.image = image
+                self.layoutIfNeeded()
+                let frame = messegeImageView.contentClippingRect
+                messegeImageView.image = UIImage.resizedCroppedImage(image: image, newSize: frame.size)
+                self.layoutIfNeeded()
+            }
             break
         case .file:
             break

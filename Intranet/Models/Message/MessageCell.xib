@@ -34,12 +34,19 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4Ak-EN-LA4">
+                                <rect key="frame" x="2" y="2" width="61" height="28"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="0.80008561643835618" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="6Ce-i5-wyB" firstAttribute="top" secondItem="2q5-MW-qXT" secondAttribute="top" constant="7" id="0F0-zc-WpR"/>
                             <constraint firstItem="6Ce-i5-wyB" firstAttribute="leading" secondItem="2q5-MW-qXT" secondAttribute="leading" constant="10" id="72E-TY-KqR"/>
+                            <constraint firstItem="Yr6-CE-Bll" firstAttribute="top" secondItem="4Ak-EN-LA4" secondAttribute="bottom" constant="5" id="FG1-a1-ZQp"/>
+                            <constraint firstItem="4Ak-EN-LA4" firstAttribute="leading" secondItem="2q5-MW-qXT" secondAttribute="leading" constant="2" id="LqF-8A-Ptw"/>
+                            <constraint firstAttribute="trailing" secondItem="4Ak-EN-LA4" secondAttribute="trailing" constant="2" id="THW-fa-yoq"/>
                             <constraint firstAttribute="trailing" secondItem="Yr6-CE-Bll" secondAttribute="trailing" constant="5" id="UEK-mW-5T8"/>
+                            <constraint firstItem="4Ak-EN-LA4" firstAttribute="top" secondItem="2q5-MW-qXT" secondAttribute="top" constant="2" id="XMD-8C-er7"/>
                             <constraint firstItem="Yr6-CE-Bll" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="2q5-MW-qXT" secondAttribute="leading" constant="10" id="Z5p-Yi-2xo"/>
                             <constraint firstAttribute="trailing" secondItem="6Ce-i5-wyB" secondAttribute="trailing" constant="10" id="dbs-0g-MhA"/>
                             <constraint firstAttribute="bottom" secondItem="Yr6-CE-Bll" secondAttribute="bottom" constant="5" id="oVd-TE-9aM"/>
@@ -62,11 +69,24 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="bottomImageConstraint" destination="FG1-a1-ZQp" id="afP-wa-BZ3"/>
+                <outlet property="bottomTimeConstraint" destination="oVd-TE-9aM" id="rdG-oV-1rU"/>
                 <outlet property="leftConstraint" destination="5tS-Bj-zpP" id="sJg-QV-S4G"/>
+                <outlet property="leftImageConstraint" destination="LqF-8A-Ptw" id="9kF-lt-NvB"/>
+                <outlet property="leftTextConstraint" destination="72E-TY-KqR" id="zbZ-UL-HsV"/>
+                <outlet property="leftTimeConstraint" destination="Z5p-Yi-2xo" id="WYp-d3-r47"/>
                 <outlet property="messageView" destination="2q5-MW-qXT" id="dsP-iy-ezi"/>
+                <outlet property="messegeImageView" destination="4Ak-EN-LA4" id="Db1-wd-nSk"/>
                 <outlet property="rightConstraint" destination="fWJ-N9-hLl" id="Oni-V9-FMt"/>
+                <outlet property="rightImageConstraint" destination="THW-fa-yoq" id="f1y-ty-fiL"/>
+                <outlet property="rightTextConstraint" destination="dbs-0g-MhA" id="tqC-sE-Nge"/>
+                <outlet property="rightTimeConstraint" destination="UEK-mW-5T8" id="zMO-1v-Ofp"/>
                 <outlet property="textContentLabel" destination="6Ce-i5-wyB" id="PPo-Rd-zNH"/>
+                <outlet property="timeAndTextConstraint" destination="r4D-gv-a8K" id="SBy-qy-UyD"/>
+                <outlet property="timeHeightConstraint" destination="9Le-3H-VY4" id="1ik-Ss-8Nk"/>
                 <outlet property="timeLabel" destination="Yr6-CE-Bll" id="pvT-co-win"/>
+                <outlet property="topImageConstraint" destination="XMD-8C-er7" id="hjP-kq-3Ch"/>
+                <outlet property="topTextConstraint" destination="0F0-zc-WpR" id="Zrc-SE-nCw"/>
             </connections>
             <point key="canvasLocation" x="137.68115942028987" y="92.745535714285708"/>
         </tableViewCell>
