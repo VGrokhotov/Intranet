@@ -47,8 +47,34 @@ class ConnectionViewController: UIViewController, UINavigationControllerDelegate
     }
     
     @IBAction func photoButtonPressed(_ sender: Any) {
-        scrollDown(animated: true)
+        
+        let cameraIcon = UIImage(systemName: "camera")
+        let photoIcon = UIImage(systemName: "photo")
+        
+        let actionSheet = UIAlertController(title: nil,
+                                            message: nil,
+                                            preferredStyle: .actionSheet)
+        let camera = UIAlertAction(title: "Camera", style: .default) {_ in
+            self.chooseImagePicker(source: .camera)
+        }
+        camera.setValue(cameraIcon, forKey: "image")
+        camera.setValue(CATextLayerAlignmentMode.left, forKey: "titleTextAlignment")
+        
+        let photo = UIAlertAction(title: "Photo", style: .default) { _ in
+            self.chooseImagePicker(source: .photoLibrary)
+        }
+        photo.setValue(photoIcon, forKey: "image")
+        photo.setValue(CATextLayerAlignmentMode.left, forKey: "titleTextAlignment")
+        
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel)
+        
+        actionSheet.addAction(camera)
+        actionSheet.addAction(photo)
+        actionSheet.addAction(cancel)
+        
+        present(actionSheet, animated: true)
     }
+    
     @IBAction func clipButtonPressed(_ sender: Any) {
         scrollDown(animated: true)
     }
@@ -413,5 +439,35 @@ extension ConnectionViewController{
             self.view.frame.size.height += keyboardSize.size.height
             //tableView.setContentOffset(CGPoint(x: 0, y:             tableView.contentOffset.y - keyboardSize.height), animated: true)
         }
+    }
+}
+
+// MARK: - Work with image
+
+extension ConnectionViewController: UIImagePickerControllerDelegate {
+    
+    func chooseImagePicker(source: UIImagePickerController.SourceType){
+        if UIImagePickerController.isSourceTypeAvailable(source){
+            let imagePicker = UIImagePickerController()
+            imagePicker.delegate = self
+            imagePicker.allowsEditing = true
+            imagePicker.sourceType = source
+            present(imagePicker, animated: true)
+        }
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
+        guard
+            let image = info[.editedImage] as? UIImage,
+            let imageData = image.pngData(),
+            let user = UserAuthorization.shared.user
+        else { dismiss(animated: true); return }
+        
+        let newMessage = Message(senderID: user.id, content: imageData, contentType: .image, time: Date())
+        send(message: newMessage)
+        
+        dismiss(animated: true)
+        scrollDown(animated: true)
     }
 }
