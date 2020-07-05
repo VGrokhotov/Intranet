@@ -88,6 +88,7 @@ extension MessageCell: ConfigurableView {
             deactivateImageView()
             activateTextLabel()
             textContentLabel.text = String(data: message?.content ?? Data(), encoding: .utf8)
+            textContentLabel.textColor = .black
             break
         case .image:
             deactivateTextLabel()
@@ -104,6 +105,15 @@ extension MessageCell: ConfigurableView {
             }
             break
         case .file:
+            deactivateImageView()
+            activateTextLabel()
+            if let fileName = message?.fileName, let fileSize = message?.fileSize {
+                let string = NSMutableAttributedString.init(string: "\(fileName), \(fileSize/1024) Kb")
+                string.addAttribute(NSAttributedString.Key.underlineStyle, value: 1, range: NSRange.init(location: 0, length: string.length))
+                textContentLabel.attributedText = string
+                textContentLabel.textColor = .systemBlue
+                
+            }
             break
         case .unknown:
             //не поддерживается
@@ -111,7 +121,7 @@ extension MessageCell: ConfigurableView {
         }
         
         if message?.senderID == UserAuthorization.shared.user?.id {
-            messageView.backgroundColor = #colorLiteral(red: 0.3076745272, green: 0.5609909296, blue: 0.9542145133, alpha: 1)
+            messageView.backgroundColor = #colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1)
             
             NSLayoutConstraint.deactivate([leftConstraint])
             NSLayoutConstraint.activate([rightConstraint])

@@ -76,9 +76,13 @@ class ConnectionViewController: UIViewController, UINavigationControllerDelegate
     }
     
     @IBAction func clipButtonPressed(_ sender: Any) {
-        let newVC = DocumentsViewController()
         
-        present(newVC, animated: true, completion: {})
+        let documentPicker = DocumentsViewController(documentTypes: ["public.data", "public.content"],
+        in: .open)
+        documentPicker.delegate = self
+
+        present(documentPicker, animated: true, completion: nil)
+        
         
         //scrollDown(animated: true)
     }
@@ -476,5 +480,39 @@ extension ConnectionViewController: UIImagePickerControllerDelegate {
         
         dismiss(animated: true)
         scrollDown(animated: true)
+    }
+}
+
+extension ConnectionViewController: UIDocumentPickerDelegate {
+    
+    public func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
+        guard controller.documentPickerMode == .open, let url = urls.first, url.startAccessingSecurityScopedResource() else { return }
+        defer {
+            DispatchQueue.main.async {
+                url.stopAccessingSecurityScopedResource()
+            }
+        }
+        
+        for url in urls {
+            let name = url.lastPathComponent
+            guard
+                let user = UserAuthorization.shared.user,
+                let data = try? Data(contentsOf: url),
+                let fileSize = try? url.resourceValues(forKeys:[.fileSizeKey]).fileSize
+            else { return }
+            
+            let newMessage = Message(senderID: user.id, content: data, contentType: .file, time: Date(), fileSize: fileSize, fileName: name)
+            send(message: newMessage)
+            print("\(newMessage) sended ")
+            newMessages.append(newMessage)
+            messages.append(newMessage)
+            tableView.reloadData()
+            scrollDown(animated: false)
+        }
+        
+
+        controller.dismiss(animated: true) { [weak self] in
+            self?.scrollDown(animated: false)
+        }
     }
 }

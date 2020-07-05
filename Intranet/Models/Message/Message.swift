@@ -14,19 +14,25 @@ class Message: NSObject, NSCoding, Codable {
     var content: Data
     var contentType: ContentType
     var time: Date
+    var fileSize: Int?
+    var fileName: String?
     
     enum Key: String {
         case senderID = "senderID"
         case content = "content"
         case contentType = "contentType"
         case time = "time"
+        case fileSize = "fileSize"
+        case fileName = "fileName"
     }
     
-    init(senderID: UUID, content: Data, contentType: ContentType, time: Date) {
+    init(senderID: UUID, content: Data, contentType: ContentType, time: Date, fileSize: Int? = nil, fileName: String? = nil) {
         self.senderID = senderID
         self.content = content
         self.contentType = contentType
         self.time = time
+        self.fileSize = fileSize
+        self.fileName = fileName
     }
     
     func encode(with coder: NSCoder) {
@@ -34,6 +40,8 @@ class Message: NSObject, NSCoding, Codable {
         coder.encode(content, forKey: Key.content.rawValue)
         coder.encode(contentType.rawValue, forKey: Key.contentType.rawValue)
         coder.encode(time, forKey: Key.time.rawValue)
+        coder.encode(fileSize, forKey: Key.fileSize.rawValue)
+        coder.encode(fileName, forKey: Key.fileName.rawValue)
     }
     
     required init?(coder: NSCoder) {
@@ -49,6 +57,8 @@ class Message: NSObject, NSCoding, Codable {
         self.content = content
         self.contentType = contentType
         self.time = time
+        self.fileSize = coder.decodeObject(forKey: Key.fileSize.rawValue) as? Int
+        self.fileName = coder.decodeObject(forKey: Key.fileName.rawValue) as? String
     }
 }
 
