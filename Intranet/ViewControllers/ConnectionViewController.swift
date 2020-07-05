@@ -76,7 +76,11 @@ class ConnectionViewController: UIViewController, UINavigationControllerDelegate
     }
     
     @IBAction func clipButtonPressed(_ sender: Any) {
-        scrollDown(animated: true)
+        let newVC = DocumentsViewController()
+        
+        present(newVC, animated: true, completion: {})
+        
+        //scrollDown(animated: true)
     }
     
     @IBAction func startingConnectionButtonPressed(_ sender: Any) {
