@@ -225,6 +225,18 @@ class ConnectionViewController: UIViewController, UINavigationControllerDelegate
         present(allert, animated: true)
     }
     
+    func lostConnectionAlert() {
+        let ac = UIAlertController(title: "Session ended", message: "To save new messages press \"Ok\"", preferredStyle: .alert)
+        
+        let okAction = UIAlertAction(title: "Ok", style: .default) { [weak self] _ in
+            self?.closeSession()
+        }
+        
+        ac.addAction(okAction)
+        present(ac, animated: true)
+    }
+    
+    
     //MARK: Multipeer Connectivity
     
     func startHosting(action: UIAlertAction!) {
@@ -257,6 +269,13 @@ class ConnectionViewController: UIViewController, UINavigationControllerDelegate
 
         case MCSessionState.notConnected:
             print("Not Connected: \(peerID.displayName)")
+            
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
+                if self.hasResivedInterlocutorInfo {
+                    self.lostConnectionAlert()
+                }
+            }
             
         @unknown default:
             print("Unknown state: \(peerID.displayName)")
