@@ -29,6 +29,7 @@ class ConnectionViewController: UIViewController, UINavigationControllerDelegate
     var peerID: MCPeerID!
     var mcSession: MCSession!
     var mcAdvertiserAssistant: MCAdvertiserAssistant!
+    weak var mcBrowser : MCBrowserViewController?
     
     @IBAction func sendButtonPressed(_ sender: Any) {
         guard
@@ -247,6 +248,7 @@ class ConnectionViewController: UIViewController, UINavigationControllerDelegate
     func joinSession(action: UIAlertAction!) {
         let mcBrowser = MCBrowserViewController(serviceType: "Intranet", session: mcSession)
         mcBrowser.delegate = self
+        self.mcBrowser = mcBrowser
         present(mcBrowser, animated: true)
     }
     
@@ -256,8 +258,8 @@ class ConnectionViewController: UIViewController, UINavigationControllerDelegate
             print("Connected: \(peerID.displayName)")
             
             DispatchQueue.main.async { [weak self] in
+                self?.mcBrowser?.dismiss(animated: true, completion: nil)
                 self?.activateViews()
-                //self?.startConnectionButton.isEnabled = false
                 self?.changeRightButton()
                 guard let user = UserAuthorization.shared.user else { return }
                 self?.send(userInfo: user)
