@@ -253,6 +253,15 @@ class ConnectionViewController: UIViewController, UINavigationControllerDelegate
     }
     
     func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
+        
+        DispatchQueue.main.async { [weak self] in
+            let sessionCount = session.connectedPeers.count
+
+            if sessionCount == 2 {
+                self?.mcAdvertiserAssistant.stop()
+            }
+        }
+        
         switch state {
         case MCSessionState.connected:
             print("Connected: \(peerID.displayName)")
