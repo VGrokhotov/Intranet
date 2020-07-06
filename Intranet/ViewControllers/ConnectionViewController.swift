@@ -24,6 +24,8 @@ class ConnectionViewController: UIViewController, UINavigationControllerDelegate
     var hasResivedInterlocutorInfo = false
     var interlocutor: User?
     
+    static let maxSize = 5242880
+    
     var peerID: MCPeerID!
     var mcSession: MCSession!
     var mcAdvertiserAssistant: MCAdvertiserAssistant!
@@ -211,7 +213,17 @@ class ConnectionViewController: UIViewController, UINavigationControllerDelegate
         allert.addAction(okAction)
         present(allert, animated: true)
     }
-
+    
+    func sizeAlert() {
+        let allert = UIAlertController(title: "File is too big!", message: "You cannot share files with size more then 5 Mb", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default) { [weak self] action in
+            guard let self = self else { return }
+            self.clipButtonPressed(self)
+        }
+        
+        allert.addAction(okAction)
+        present(allert, animated: true)
+    }
     
     //MARK: Multipeer Connectivity
     
@@ -500,6 +512,11 @@ extension ConnectionViewController: UIDocumentPickerDelegate {
                 let data = try? Data(contentsOf: url),
                 let fileSize = try? url.resourceValues(forKeys:[.fileSizeKey]).fileSize
             else { return }
+            
+            if fileSize > ConnectionViewController.maxSize {
+                sizeAlert()
+                return
+            }
             
             let newMessage = Message(senderID: user.id, content: data, contentType: .file, time: Date(), fileSize: fileSize, fileName: name)
             send(message: newMessage)
