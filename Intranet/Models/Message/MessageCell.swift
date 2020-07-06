@@ -87,6 +87,7 @@ extension MessageCell: ConfigurableView {
         case .text:
             deactivateImageView()
             activateTextLabel()
+            textContentLabel.attributedText = nil
             textContentLabel.text = String(data: message?.content ?? Data(), encoding: .utf8)
             textContentLabel.textColor = .black
             break
@@ -107,6 +108,7 @@ extension MessageCell: ConfigurableView {
         case .file:
             deactivateImageView()
             activateTextLabel()
+            textContentLabel.text = nil
             if let fileName = message?.fileName, let fileSize = message?.fileSize {
                 let string = NSMutableAttributedString.init(string: "\(fileName), \(fileSize/1024) Kb")
                 string.addAttribute(NSAttributedString.Key.underlineStyle, value: 1, range: NSRange.init(location: 0, length: string.length))
