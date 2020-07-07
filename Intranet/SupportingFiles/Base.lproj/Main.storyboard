@@ -207,7 +207,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OML-Ga-IoT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="431.8840579710145" y="583.92857142857144"/>
+            <point key="canvasLocation" x="848" y="563"/>
         </scene>
         <!--Profile View Controller-->
         <scene sceneID="p1w-aN-de7">
@@ -257,7 +257,7 @@
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Izp-EP-QnL">
                                 <rect key="frame" x="20" y="793" width="374" height="39"/>
                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-Medium" family="Apple SD Gothic Neo" pointSize="22"/>
-                                <state key="normal" title="Authorize">
+                                <state key="normal" title="Identify">
                                     <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                 </state>
                                 <connections>
@@ -292,7 +292,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2xz-MH-CKR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="432" y="-788"/>
+            <point key="canvasLocation" x="87" y="563"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="cxa-Tf-4ly">

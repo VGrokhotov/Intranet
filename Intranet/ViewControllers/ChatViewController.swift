@@ -83,8 +83,8 @@ class ChatViewController: UIViewController {
     
     func authorizationAlert(){
         
-        let allert = UIAlertController(title: "You are not authorized", message: "To continue, you should authorize", preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "Authorize", style: .default) { [weak self] _ in
+        let allert = UIAlertController(title: "You are not identified", message: "To continue, you should identify yourself", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "Identify", style: .default) { [weak self] _ in
             
             let destinationViewController = ProfileViewController.makeVC()
             

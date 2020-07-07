@@ -38,7 +38,7 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = "Authorization"
+        title = "Identification"
         
         configurate(button: authorizeButton)
         
@@ -68,7 +68,7 @@ class ProfileViewController: UIViewController {
     
     func successAlert(){
         
-        let allert = UIAlertController(title: "Success", message: "You authorized successfully!", preferredStyle: .alert)
+        let allert = UIAlertController(title: "Success", message: "You identified successfully!", preferredStyle: .alert)
         let okAction = UIAlertAction(title: "OK", style: .default) { [weak self] _ in
             self?.navigationController?.popViewController(animated: true)
         }
